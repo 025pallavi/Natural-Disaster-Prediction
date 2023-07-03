@@ -3,8 +3,6 @@
 
 # In[1]:
 
-
-# if you use gpu accelerator in kaggle
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -12,7 +10,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # ## 1. Importing Libraries
 
 # In[2]:
-
 
 import tensorflow as tf
 
@@ -34,7 +31,6 @@ import pandas as pd
 
 # In[3]:
 
-
 for device in tf.config.list_physical_devices():
     print(": {}".format(device.name))
 
@@ -51,7 +47,6 @@ test_path = r"C:\Users\asus\OneDrive\Desktop\wildfire\test"
 
 
 # In[5]:
-
 
 image_shape = (350,350,3)
 N_CLASSES = 2
@@ -83,12 +78,11 @@ test_generator = test_datagen.flow_from_directory(test_path,
 
 # In[6]:
 
-
 # defining the coefficient that our regularizer will use
 weight_decay = 1e-3
-
 # building a sequential CNN model and adding layers to it
 # dropout and the regularizer are used in general to prevent overfitting
+
 first_model = Sequential([
     Conv2D(filters = 8 , kernel_size = 2, activation = 'relu', 
     input_shape = image_shape), MaxPooling2D(pool_size = 2),
@@ -114,7 +108,6 @@ first_model.summary()
 
 # In[7]:
 
-
 # don't stop everything if an image didn't load correctly
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -139,7 +132,6 @@ history = first_model.fit(train_generator,
 
 # In[8]:
 
-
 # add history of accuracy and validation accuracy to the plot
 plt.plot(history.history['acc'], label = 'train',)
 plt.plot(history.history['val_acc'], label = 'valid')
@@ -155,7 +147,6 @@ plt.show()
 
 # In[10]:
 
-
 plt.hist(history.history['acc'], label = 'train',color='green')
 
 plt.legend(loc = 'lower right')
@@ -165,7 +156,6 @@ plt.ylabel('accuracy')
 
 # In[11]:
 
-
 plt.hist(history.history['val_acc'], label = 'valid', color='orange')
 plt.legend(loc = 'lower right')
 plt.xlabel('epochs')
@@ -173,7 +163,6 @@ plt.ylabel('accuracy')
 
 
 # In[12]:
-
 
 plt.hist(history.history['acc'], label = 'train',color='green')
 plt.hist(history.history['val_acc'], label = 'valid', color='orange')
@@ -184,7 +173,6 @@ plt.ylabel('accuracy')
 
 
 # In[9]:
-
 
 # see if it's good at predecting new inputs
 result = first_model.evaluate(test_generator)
