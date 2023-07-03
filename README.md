@@ -1,6 +1,6 @@
 # Natural Disaster Prediction Model
 
-The Natural Disaster Prediction Model leverages deep learning and Convolutional Neural Networks (CNNs) to predict and identify natural disasters (Worked specificly for wildfire as of now). Additional data sources such as satellite imagery, weather data are integrated to capture a comprehensive view of the disasters. Our project offers disaster preparedness, and efficient response, addressing critical societal challenges.
+The Natural Disaster Prediction Model leverages deep learning and Convolutional Neural Networks (CNNs) to predict and identify natural disasters (Worked specifically for wildfire as of now). Additional data sources such as satellite imagery, weather data are integrated to capture a comprehensive view of the disasters. Our project offers disaster preparedness, and efficient response, addressing critical societal challenges.
 
 ## Problem Statement
 
