@@ -23,4 +23,5 @@ The problem statement involves developing AI algorithms and models that utilize 
 In the future, we plan to incorporate the following enhancements with different image datasets of hurricanes, floods, and earthquakes to predict and identify various potential natural disasters.
 
 • Integration with real-time satellite data to provide live updates and adjust predictions accordingly.
+
 • Create a user interface with interactive visualizations.
