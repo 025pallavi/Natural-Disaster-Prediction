@@ -14,9 +14,11 @@ The problem statement involves developing AI algorithms and models that utilize 
    git clone https://github.com/your-username/natural-disaster-prediction.git
 
 3. Navigate to the project directory:
+   
    cd natural-disaster-prediction
 
 4. Install the required Python packages by running:
+   
    pip install -r requirements.txt
 
 5. Download the dataset for training and testing the model. The dataset should be organized into three directories: train, valid, and test, each containing separate folders for different classes of natural disasters.
