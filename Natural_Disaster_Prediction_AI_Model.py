@@ -52,21 +52,18 @@ image_shape = (350,350,3)
 N_CLASSES = 2
 BATCH_SIZE = 256
 
-# loading training data and rescaling it using ImageDataGenerator
 train_datagen = ImageDataGenerator(dtype='float32', rescale= 1./255.)
 train_generator = train_datagen.flow_from_directory(train_path,
                                                    batch_size = BATCH_SIZE,
                                                    target_size = (350,350),
                                                    class_mode = 'categorical')
 
-# loading validation data and rescaling it using ImageDataGenerator
 valid_datagen = ImageDataGenerator(dtype='float32', rescale= 1./255.)
 valid_generator = valid_datagen.flow_from_directory(valid_path,
                                                    batch_size = BATCH_SIZE,
                                                    target_size = (350,350),
                                                    class_mode = 'categorical')
 
-# loading test data and rescaling it using ImageDataGenerator
 test_datagen = ImageDataGenerator(dtype='float32', rescale = 1.0/255.0)
 test_generator = test_datagen.flow_from_directory(test_path,
                                                    batch_size = BATCH_SIZE,
@@ -78,10 +75,7 @@ test_generator = test_datagen.flow_from_directory(test_path,
 
 # In[6]:
 
-# defining the coefficient that our regularizer will use
 weight_decay = 1e-3
-# building a sequential CNN model and adding layers to it
-# dropout and the regularizer are used in general to prevent overfitting
 
 first_model = Sequential([
     Conv2D(filters = 8 , kernel_size = 2, activation = 'relu', 
@@ -100,7 +94,6 @@ first_model = Sequential([
     Dropout(0.5),
     Dense(2,activation='softmax')
 ])
-# showing the summary of our model (layers and number of parameters)
 first_model.summary()
 
 
@@ -108,21 +101,15 @@ first_model.summary()
 
 # In[7]:
 
-# don't stop everything if an image didn't load correctly
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-# checkpointer to save the model only if it improved
 checkpointer = ModelCheckpoint('first_model.hdf5',verbose=1, save_best_only= True)
-# early stopping to stop the training if our validation loss didn't decrease for (10) consecutive epochs
 early_stopping = EarlyStopping(monitor= 'val_loss', patience= 10)
-# Adam, best optimiser for deep learning models to help with the training
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.00001)
-# setting our loss function and which metric to evaluate
 first_model.compile(loss= 'categorical_crossentropy', optimizer= optimizer,
                     metrics=['AUC','acc'])
   
-# TRAIN
 history = first_model.fit(train_generator,
                     epochs = 50,
                     verbose = 1,
@@ -132,16 +119,13 @@ history = first_model.fit(train_generator,
 
 # In[8]:
 
-# add history of accuracy and validation accuracy to the plot
 plt.plot(history.history['acc'], label = 'train',)
 plt.plot(history.history['val_acc'], label = 'valid')
 
-# adding legend and labels
 plt.legend(loc = 'lower right')
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 
-# show the plot
 plt.show()
 
 
@@ -174,7 +158,6 @@ plt.ylabel('accuracy')
 
 # In[9]:
 
-# see if it's good at predecting new inputs
 result = first_model.evaluate(test_generator)
 
 
